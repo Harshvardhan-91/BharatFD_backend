@@ -2,16 +2,8 @@
 
 A Node.js-based FAQ management system with multilingual support, caching, and WYSIWYG editor capabilities.
 
-## Features
-
-- FAQ management with multilingual support
-- Automated translations using Google Translate API
-- Redis caching for improved performance
-- RESTful API endpoints
-- Docker support for easy deployment
-- Comprehensive test coverage
-
 ## Directory Structure
+```
 faq-system/
 ├── src/
 │   ├── config/
@@ -27,7 +19,7 @@ faq-system/
 │   │   ├── cache.js        # Redis caching
 │   │   └── validator.js    # Input validation
 │   ├── services/
-│   │   └── translationService.js # Translation service
+│   │   └── translationService.js # Translation API integration
 │   └── app.js              # Express app setup
 ├── tests/
 │   └── faq.test.js        # Unit tests
@@ -36,6 +28,17 @@ faq-system/
 ├── package.json
 ├── Dockerfile
 └── docker-compose.yml
+```
+
+## Features
+
+- FAQ management with multilingual support
+- Automated translations using Google Translate API
+- Redis caching for improved performance
+- RESTful API endpoints
+- Docker support for easy deployment
+- Comprehensive test coverage
+
 ## Prerequisites
 
 - Node.js 16+
@@ -105,6 +108,22 @@ Content-Type: application/json
 }
 ```
 
+### Update FAQ
+```bash
+PUT /api/faqs/:id
+Content-Type: application/json
+
+{
+  "question": "Updated question?",
+  "answer": "Updated answer"
+}
+```
+
+### Delete FAQ
+```bash
+DELETE /api/faqs/:id
+```
+
 ## Testing
 
 ```bash
@@ -115,6 +134,12 @@ npm test
 npm test -- --coverage
 ```
 
+## Cache Implementation
+- Redis caches FAQ responses for 1 hour
+- Automatic cache invalidation on updates
+- Language-specific caching with `?lang=` parameter
+- Improved response times for frequently accessed FAQs
+
 ## Contributing
 
 1. Fork the repository
@@ -122,6 +147,13 @@ npm test -- --coverage
 3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+## Technologies Used
+- Node.js/Express
+- MongoDB/Mongoose
+- Redis
+- Docker
+- Google Cloud Translation API
 
 ## License
 
